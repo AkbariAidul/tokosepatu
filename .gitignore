@@ -1,0 +1,5 @@
+# Abaikan file konfigurasi database
+config/database.php
+
+# Abaikan folder upload
+uploads/
