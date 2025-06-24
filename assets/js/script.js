@@ -20,7 +20,7 @@ $(document).ready(function() {
         });
     });
 
-    // Preview gambar saat upload
+    // Preview gambar saat upload di form produk
     $('#gambar').on('change', function(event) {
         const [file] = this.files;
         if (file) {
@@ -34,13 +34,13 @@ $(document).ready(function() {
         }
     });
 
-    // Ajax untuk update status pesanan
+    // Ajax untuk update status pesanan di halaman daftar pesanan
     $('.status-select').on('change', function() {
         const order_id = $(this).data('id');
         const status = $(this).val();
         
         $.ajax({
-            url: 'update_status.php',
+            url: 'update_status.php', // Pastikan file ini ada di folder yang sama dengan halaman pesanan
             type: 'POST',
             data: {
                 order_id: order_id,
@@ -73,53 +73,48 @@ $(document).ready(function() {
             }
         });
     });
-});
-$('.form-update-stok').on('submit', function(e) {
-    e.preventDefault();
-    const form = $(this);
-    const productId = form.data('id');
-    const newStock = form.find('input[name="stok"]').val();
 
-    $.ajax({
-        url: '../stok/proses_update_stok.php',
-        type: 'POST',
-        data: form.serialize(),
-        dataType: 'json',
-        success: function(response) {
-            if (response.success) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Berhasil!',
-                    text: response.message,
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 2000
-                });
-                // Update tampilan stok di tabel secara langsung
-                const stockDisplay = $('#stok-display-' + productId);
-                stockDisplay.text(newStock);
-                
-                // Ubah warna jika stok kritis
-                if (parseInt(newStock) <= 10) {
-                    stockDisplay.removeClass('text-gray-900').addClass('text-red-500');
+    // Ajax untuk update stok di halaman Manajemen Stok
+    $('.form-update-stok').on('submit', function(e) {
+        e.preventDefault();
+        const form = $(this);
+        const productId = form.data('id');
+        const newStock = form.find('input[name="stok"]').val();
+
+        $.ajax({
+            url: '../stok/proses_update_stok.php',
+            type: 'POST',
+            data: form.serialize(),
+            dataType: 'json',
+            success: function(response) {
+                if (response.success) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil!',
+                        text: response.message,
+                        timer: 1500, // Durasi pop-up
+                        showConfirmButton: false
+                    }).then(() => {
+                        // INI BAGIAN PENTINGNYA:
+                        // Setelah pop-up hilang, refresh halaman ke daftar stok utama
+                        window.location.href = '/tokosepatu/modules/stok/stok.php';
+                    });
                 } else {
-                    stockDisplay.removeClass('text-red-500').addClass('text-gray-900');
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal',
+                        text: response.message
+                    });
                 }
-            } else {
+            },
+            error: function() {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Gagal',
-                    text: response.message
+                    title: 'Error',
+                    text: 'Gagal menghubungi server.'
                 });
             }
-        },
-        error: function() {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Gagal menghubungi server.'
-            });
-        }
+        });
     });
-});
+
+}); // Akhir dari $(document).ready

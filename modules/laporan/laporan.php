@@ -40,12 +40,12 @@ $orders = $stmt_orders->fetchAll();
 
 // Ambil produk terlaris
 $stmt_top_produk = $pdo->prepare("
-    SELECT pr.nama_produk, SUM(dp.jumlah) as total_terjual
+    SELECT pr.nama_produk, pr.gambar, SUM(dp.jumlah) as total_terjual
     FROM detail_pesanan dp
     JOIN produk pr ON dp.produk_id = pr.id
     JOIN pesanan p ON dp.pesanan_id = p.id
     WHERE p.status = 'selesai' AND DATE(p.tanggal_pesanan) BETWEEN ? AND ?
-    GROUP BY pr.id, pr.nama_produk
+    GROUP BY pr.id, pr.nama_produk, pr.gambar
     ORDER BY total_terjual DESC
     LIMIT 5
 ");
@@ -102,10 +102,16 @@ $top_produk = $stmt_top_produk->fetchAll();
     <div class="lg:col-span-1 bg-white rounded-2xl shadow-lg self-start">
         <h3 class="text-lg font-semibold text-gray-800 p-4 border-b">Top 5 Produk Terlaris</h3>
         <ul class="divide-y divide-gray-200">
-            <?php foreach($top_produk as $produk): ?>
-            <li class="p-4 flex justify-between items-center"><span class="text-sm text-gray-800"><?= htmlspecialchars($produk['nama_produk']) ?></span><span class="font-bold text-orange-500"><?= $produk['total_terjual'] ?>x</span></li>
-            <?php endforeach; ?>
-        </ul>
+    <?php foreach($top_produk as $produk): ?>
+    <li class="p-4 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <img src="/tokosepatu/uploads/<?= htmlspecialchars($produk['gambar']) ?>" class="w-12 h-12 object-cover rounded-md">
+            <span class="text-sm text-gray-800 font-semibold"><?= htmlspecialchars($produk['nama_produk']) ?></span>
+        </div>
+        <span class="font-bold text-orange-500 bg-orange-100 px-3 py-1 rounded-full text-sm"><?= $produk['total_terjual'] ?>x</span>
+    </li>
+    <?php endforeach; ?>
+</ul>
     </div>
 </div>
 

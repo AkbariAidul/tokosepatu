@@ -1,14 +1,13 @@
-/* Custom styles untuk dashboard */
+/* dashboard */
 .icon-watermark {
     transition: all 0.3s ease-in-out;
 }
-/* Efek hover untuk kartu statistik di dashboard */
 .group:hover .icon-watermark {
     opacity: 0.3;
     transform: scale(1.1) rotate(12deg);
 }
 
-/* Style untuk thumbnail produk di tabel */
+/* thumbnail produk di tabel */
 .product-thumbnail {
     width: 60px;
     height: 60px;
@@ -24,29 +23,24 @@
 #sidebar-nav::-webkit-scrollbar-thumb:hover { background-color: #6b7280; }
 #sidebar-nav { scrollbar-width: thin; scrollbar-color: #4b5563 transparent; }
 
-
-/* ======================================= */
-/* ===== STYLE BARU UNTUK SEMUA FORM ===== */
-/* ======================================= */
-
 .form-group {
     position: relative;
 }
 
 .form-input {
-    background-color: #f9fafb; /* bg-gray-50 */
-    border: 1px solid #d1d5db; /* border-gray-300 */
-    color: #111827; /* text-gray-900 */
-    padding: 1.25rem 1rem 0.75rem 1rem; /* Atas, Kanan, Bawah, Kiri */
+    background-color: #f9fafb;
+    border: 1px solid #d1d5db;
+    color: #111827;
+    padding: 1.25rem 1rem 0.75rem 1rem;
     transition: all 0.2s ease-in-out;
-    border-radius: 0.5rem; /* rounded-lg */
+    border-radius: 0.5rem;
     width: 100%;
 }
 
 .form-input:focus {
     outline: none;
-    border-color: #f97316; /* border-orange-500 */
-    background-color: #ffffff; /* bg-white */
+    border-color: #f97316;
+    background-color: #ffffff;
     box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.2);
 }
 
@@ -54,13 +48,12 @@
     position: absolute;
     left: 1rem;
     top: 1rem;
-    color: #6b7280; /* text-gray-500 */
+    color: #6b7280;
     pointer-events: none;
     transition: all 0.2s ease-out;
-    /* Memberi background agar tidak overlap saat naik */
     background-color: #f9fafb; 
     padding: 0 4px;
-    z-index: 1; /* Pastikan label di atas input */
+    z-index: 1;
 }
 
 /* Kondisi saat label "naik" */
@@ -83,7 +76,7 @@
     background-color: #ffffff;
 }
 
-/* Style untuk Select/Dropdown agar senada */
+/* Style untuk Select/Dropdown */
 .form-select {
     display: block;
     width: 100%;

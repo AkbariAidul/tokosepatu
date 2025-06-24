@@ -76,8 +76,14 @@ $kupon_list = $pdo->query("SELECT * FROM kupon ORDER BY id DESC")->fetchAll();
                     </tr>
                     <?php endforeach; ?>
                 <?php else: ?>
-                    <tr><td colspan="5" class="text-center py-10 text-gray-500">Belum ada kupon yang dibuat.</td></tr>
-                <?php endif; ?>
+    <tr>
+        <td colspan="5" class="text-center py-16">
+            <i class="fas fa-ticket-alt fa-3x text-gray-300 mb-3"></i>
+            <h3 class="text-lg font-medium text-gray-600">Belum Ada Kupon</h3>
+            <p class="text-sm text-gray-400 mt-1">Klik tombol "Tambah Kupon" untuk membuat kupon diskon baru.</p>
+        </td>
+    </tr>
+<?php endif; ?>
             </tbody>
         </table>
     </div>
