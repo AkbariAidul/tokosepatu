@@ -52,35 +52,35 @@ $pengaturan_list = $stmt->fetchAll(PDO::FETCH_KEY_PAIR); // Ambil sebagai pasang
     <form action="pengaturan.php" method="POST">
         <div class="space-y-6">
             
-            <div>
-                <label for="nama_toko" class="block text-sm font-medium text-gray-700">Nama Toko</label>
-                <input type="text" name="nama_toko" id="nama_toko" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500" value="<?= htmlspecialchars($pengaturan_list['nama_toko'] ?? '') ?>">
+            <div class="form-group">
+                <input type="text" name="nama_toko" id="nama_toko" class="form-input placeholder-transparent" placeholder="Nama Toko" value="<?= htmlspecialchars($pengaturan_list['nama_toko'] ?? '') ?>">
+                <label for="nama_toko" class="form-label">Nama Toko</label>
             </div>
 
-            <div>
-                <label for="alamat_toko" class="block text-sm font-medium text-gray-700">Alamat Toko</label>
-                <textarea name="alamat_toko" id="alamat_toko" rows="3" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500"><?= htmlspecialchars($pengaturan_list['alamat_toko'] ?? '') ?></textarea>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                    <label for="email_toko" class="block text-sm font-medium text-gray-700">Email Toko (CS)</label>
-                    <input type="email" name="email_toko" id="email_toko" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500" value="<?= htmlspecialchars($pengaturan_list['email_toko'] ?? '') ?>">
-                </div>
-                <div>
-                    <label for="telepon_toko" class="block text-sm font-medium text-gray-700">Telepon Toko (CS)</label>
-                    <input type="text" name="telepon_toko" id="telepon_toko" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500" value="<?= htmlspecialchars($pengaturan_list['telepon_toko'] ?? '') ?>">
-                </div>
+            <div class="form-group">
+                <textarea name="alamat_toko" id="alamat_toko" rows="3" class="form-input placeholder-transparent" placeholder="Alamat Toko"><?= htmlspecialchars($pengaturan_list['alamat_toko'] ?? '') ?></textarea>
+                <label for="alamat_toko" class="form-label">Alamat Toko</label>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                    <label for="nomor_rekening" class="block text-sm font-medium text-gray-700">Nomor Rekening Pembayaran</label>
-                    <input type="text" name="nomor_rekening" id="nomor_rekening" placeholder="Contoh: BCA - 1234567890 a/n Toko Anda" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500" value="<?= htmlspecialchars($pengaturan_list['nomor_rekening'] ?? '') ?>">
+                <div class="form-group">
+                    <input type="email" name="email_toko" id="email_toko" class="form-input placeholder-transparent" placeholder="Email Toko (CS)" value="<?= htmlspecialchars($pengaturan_list['email_toko'] ?? '') ?>">
+                    <label for="email_toko" class="form-label">Email Toko (CS)</label>
                 </div>
-                <div>
-                    <label for="biaya_pengiriman" class="block text-sm font-medium text-gray-700">Biaya Pengiriman Default (Rp)</label>
-                    <input type="number" name="biaya_pengiriman" id="biaya_pengiriman" placeholder="Contoh: 15000" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500" value="<?= htmlspecialchars($pengaturan_list['biaya_pengiriman'] ?? '') ?>">
+                <div class="form-group">
+                    <input type="text" name="telepon_toko" id="telepon_toko" class="form-input placeholder-transparent" placeholder="Telepon Toko (CS)" value="<?= htmlspecialchars($pengaturan_list['telepon_toko'] ?? '') ?>">
+                    <label for="telepon_toko" class="form-label">Telepon Toko (CS)</label>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="form-group">
+                    <input type="text" name="nomor_rekening" id="nomor_rekening" class="form-input placeholder-transparent" placeholder="Contoh: BCA - 1234567890 a/n Toko Anda" value="<?= htmlspecialchars($pengaturan_list['nomor_rekening'] ?? '') ?>">
+                    <label for="nomor_rekening" class="form-label">Nomor Rekening Pembayaran</label>
+                </div>
+                <div class="form-group">
+                    <input type="number" name="biaya_pengiriman" id="biaya_pengiriman" class="form-input placeholder-transparent" placeholder="Contoh: 15000" value="<?= htmlspecialchars($pengaturan_list['biaya_pengiriman'] ?? '') ?>">
+                    <label for="biaya_pengiriman" class="form-label">Biaya Pengiriman Default (Rp)</label>
                 </div>
             </div>
 

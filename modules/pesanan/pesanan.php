@@ -28,14 +28,34 @@ $sql .= " ORDER BY p.tanggal_pesanan DESC";
 
 $stmt = $pdo->prepare($sql);
 $stmt->execute($params);
-$orders = $stmt->fetchAll();
+$orders = $stmt->fetchAll();    
 ?>
 <?php require_once '../../includes/sidebar.php'; ?>
 
-<div class="mb-8">
-    <h1 class="text-3xl font-bold text-gray-800">Manajemen Pesanan</h1>
-    <p class="text-gray-500 mt-1">Lacak dan kelola semua pesanan yang masuk.</p>
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
+    <div>
+        <h1 class="text-3xl font-bold text-gray-800">Manajemen Pesanan</h1>
+        <p class="text-gray-500 mt-1">Lacak dan kelola semua pesanan yang masuk.</p>
+    </div>
+    <a href="tambah.php" class="mt-4 sm:mt-0 flex items-center bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-5 rounded-lg shadow-sm transition duration-200">
+        <i class="fas fa-plus mr-2"></i> Tambah Pesanan
+    </a>
 </div>
+
+<?php
+// Letakkan kode untuk menampilkan notifikasi di sini
+if (isset($_SESSION['flash_message'])) {
+    $message = $_SESSION['flash_message'];
+    unset($_SESSION['flash_message']);
+    echo "<script>
+        Swal.fire({
+            icon: '{$message['type']}',
+            title: '{$message['title']}',
+            text: '{$message['text']}',
+        });
+    </script>";
+}
+?>
 
 <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
     <div class="p-4 border-b">

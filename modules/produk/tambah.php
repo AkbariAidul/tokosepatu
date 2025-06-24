@@ -15,31 +15,35 @@ $categories = $pdo->query("SELECT * FROM kategori ORDER BY nama_kategori ASC")->
     <form action="proses_tambah.php" method="POST" enctype="multipart/form-data">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div class="lg:col-span-2 space-y-6">
-                <div>
-                    <label for="nama_produk" class="block text-sm font-medium text-gray-700">Nama Produk</label>
-                    <input type="text" id="nama_produk" name="nama_produk" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500" required>
+                <div class="form-group">
+                    <input type="text" id="nama_produk" name="nama_produk" class="form-input placeholder-transparent" placeholder="Nama Produk" required>
+                    <label for="nama_produk" class="form-label">Nama Produk</label>
                 </div>
-                <div>
-                    <label for="kategori_id" class="block text-sm font-medium text-gray-700">Kategori</label>
-                    <select id="kategori_id" name="kategori_id" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500" required>
-                        <option value="">-- Pilih Kategori --</option>
+                <div class="form-group">
+                    <select id="kategori_id" name="kategori_id" class="form-input form-select placeholder-transparent" required>
+                        <option value="" selected disabled>-- Pilih Kategori --</option>
                         <?php foreach($categories as $category): ?>
                             <option value="<?= $category['id'] ?>"><?= htmlspecialchars($category['nama_kategori']) ?></option>
                         <?php endforeach; ?>
                     </select>
+                    <label for="kategori_id" class="form-label">Kategori</label>
                 </div>
-                <div>
-                    <label for="deskripsi" class="block text-sm font-medium text-gray-700">Deskripsi</label>
-                    <textarea id="deskripsi" name="deskripsi" rows="5" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500"></textarea>
+                <div class="form-group">
+                    <textarea id="deskripsi" name="deskripsi" rows="5" class="form-input placeholder-transparent" placeholder="Deskripsi"></textarea>
+                    <label for="deskripsi" class="form-label">Deskripsi</label>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label for="harga" class="block text-sm font-medium text-gray-700">Harga (Rp)</label>
-                        <input type="number" id="harga" name="harga" placeholder="Contoh: 150000" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500" required>
+                    <div class="form-group">
+                        <input type="number" id="harga" name="harga" placeholder="Contoh: 150000" class="form-input placeholder-transparent" required>
+                        <label for="harga" class="form-label">Harga (Rp)</label>
                     </div>
-                    <div>
-                        <label for="stok" class="block text-sm font-medium text-gray-700">Stok</label>
-                        <input type="number" id="stok" name="stok" placeholder="Contoh: 50" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500" required>
+                    <div class="form-group">
+                        <input type="number" id="stok" name="stok" placeholder="Contoh: 50" class="form-input placeholder-transparent" required>
+                        <label for="stok" class="form-label">Stok</label>
+                    </div>
+                    <div class="form-group">
+                            <input type="number" id="berat" name="berat" placeholder="Contoh: 1200" class="form-input placeholder-transparent" required>
+                            <label for="berat" class="form-label">Berat (gram)</label>
                     </div>
                 </div>
             </div>

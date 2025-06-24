@@ -62,7 +62,7 @@ $low_stock_products = $stmt_low_stock->fetchAll();
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
     <div class="bg-gradient-to-br from-green-500 to-green-600 text-white p-6 rounded-xl shadow-lg flex items-center space-x-4 transition-transform transform hover:scale-105">
         <div class="bg-white/20 p-4 rounded-full"><i class="fas fa-dollar-sign text-2xl text-white"></i></div>
-        <div><p class="text-sm font-light uppercase tracking-wider">Total Revenue</p><p class="text-2xl font-bold"><?= format_rupiah($total_revenue) ?></p></div>
+        <div><p class="text-sm font-light uppercase tracking-wider">Total Revenue</p><p class="text-2xl font-bold"><?= format_rupiah_singkat($total_revenue) ?></p></div>
     </div>
     <div class="bg-gradient-to-br from-orange-500 to-orange-600 text-white p-6 rounded-xl shadow-lg flex items-center space-x-4 transition-transform transform hover:scale-105">
         <div class="bg-white/20 p-4 rounded-full"><i class="fas fa-shoe-prints text-2xl text-white"></i></div>

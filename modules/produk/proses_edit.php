@@ -9,6 +9,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $deskripsi = trim($_POST['deskripsi']);
     $harga = $_POST['harga'];
     $stok = $_POST['stok'];
+    $berat = $_POST['berat'];
+    // ... (di dalam blok try)
+    // Ubah SQL UPDATE menjadi:
+    $sql = "UPDATE produk SET nama_produk = ?, kategori_id = ?, deskripsi = ?, harga = ?, stok = ?, gambar = ?, berat = ? WHERE id = ?";
+    $stmt = $pdo->prepare($sql);
+    // Tambahkan $berat di execute:
+    $stmt->execute([$nama_produk, $kategori_id, $deskripsi, $harga, $stok, $gambar_baru, $berat, $id]);
     $gambar_lama = $_POST['gambar_lama'];
     $gambar_baru = $gambar_lama;
 

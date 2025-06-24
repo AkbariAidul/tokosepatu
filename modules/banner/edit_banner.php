@@ -55,21 +55,21 @@ if (!$banner) { header('Location: banner.php'); exit(); }
     <form action="edit_banner.php?id=<?= $id ?>" method="POST" enctype="multipart/form-data" class="space-y-4">
         <input type="hidden" name="gambar_lama" value="<?= $banner['nama_gambar'] ?>">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-                <label for="judul" class="block text-sm font-medium text-gray-700">Judul Banner</label>
-                <input type="text" name="judul" id="judul" class="mt-1 block w-full rounded-lg" value="<?= htmlspecialchars($banner['judul']) ?>" required>
+            <div class="form-group">
+                <input type="text" name="judul" id="judul" class="form-input placeholder-transparent" placeholder="Judul Banner" value="<?= htmlspecialchars($banner['judul']) ?>" required>
+                <label for="judul" class="form-label">Judul Banner</label>
             </div>
-             <div>
-                <label for="subjudul" class="block text-sm font-medium text-gray-700">Subjudul (Opsional)</label>
-                <input type="text" name="subjudul" id="subjudul" class="mt-1 block w-full rounded-lg" value="<?= htmlspecialchars($banner['subjudul']) ?>">
+            <div class="form-group">
+                <input type="text" name="subjudul" id="subjudul" class="form-input placeholder-transparent" placeholder="Subjudul (Opsional)" value="<?= htmlspecialchars($banner['subjudul']) ?>">
+                <label for="subjudul" class="form-label">Subjudul (Opsional)</label>
             </div>
-             <div>
-                <label for="teks_button" class="block text-sm font-medium text-gray-700">Teks Tombol</label>
-                <input type="text" name="teks_button" id="teks_button" class="mt-1 block w-full rounded-lg" value="<?= htmlspecialchars($banner['teks_button']) ?>">
+            <div class="form-group">
+                <input type="text" name="teks_button" id="teks_button" class="form-input placeholder-transparent" placeholder="Teks Tombol" value="<?= htmlspecialchars($banner['teks_button']) ?>">
+                <label for="teks_button" class="form-label">Teks Tombol</label>
             </div>
-             <div>
-                <label for="link_button" class="block text-sm font-medium text-gray-700">Link Tujuan</label>
-                <input type="text" name="link_button" id="link_button" class="mt-1 block w-full rounded-lg" value="<?= htmlspecialchars($banner['link_button']) ?>">
+            <div class="form-group">
+                <input type="text" name="link_button" id="link_button" class="form-input placeholder-transparent" placeholder="Link Tujuan" value="<?= htmlspecialchars($banner['link_button']) ?>">
+                <label for="link_button" class="form-label">Link Tujuan</label>
             </div>
             <div>
                  <label class="block text-sm font-medium text-gray-700">Gambar Banner</label>
@@ -77,12 +77,12 @@ if (!$banner) { header('Location: banner.php'); exit(); }
                  <input type="file" name="gambar" id="gambar" class="mt-1 block w-full text-sm">
                  <small class="text-gray-500">Kosongkan jika tidak ingin mengubah gambar.</small>
             </div>
-             <div>
-                <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
-                <select name="status" id="status" class="mt-1 block w-full rounded-lg">
+             <div class="form-group">
+                <select name="status" id="status" class="form-input form-select placeholder-transparent">
                     <option value="aktif" <?= $banner['status'] == 'aktif' ? 'selected' : '' ?>>Aktif</option>
                     <option value="tidak aktif" <?= $banner['status'] == 'tidak aktif' ? 'selected' : '' ?>>Tidak Aktif</option>
                 </select>
+                <label for="status" class="form-label">Status</label>
             </div>
         </div>
         <div class="flex justify-end pt-4 gap-3">

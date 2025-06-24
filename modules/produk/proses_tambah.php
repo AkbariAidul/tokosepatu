@@ -8,6 +8,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $deskripsi = trim($_POST['deskripsi']);
     $harga = $_POST['harga'];
     $stok = $_POST['stok'];
+    $berat = $_POST['berat'];
+    // ... (di dalam blok try)
+    // Ubah SQL INSERT menjadi:
+    $sql = "INSERT INTO produk (nama_produk, kategori_id, deskripsi, harga, stok, gambar, berat) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $stmt = $pdo->prepare($sql);
+    // Tambahkan $berat di execute:
+    $stmt->execute([$nama_produk, $kategori_id, $deskripsi, $harga, $stok, $gambar_nama, $berat]);
     $gambar_nama = '';
 
     if (empty($nama_produk) || empty($kategori_id) || empty($harga) || empty($stok)) {

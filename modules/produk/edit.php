@@ -1,53 +1,63 @@
 <?php
 require_once '../../config/database.php';
 require_once '../../includes/header.php';
+if (!isset($_SESSION['user_id'])) {
+    header('Location: /tokosepatu/login.php');
+    exit();
+}
+
 if (!isset($_GET['id'])) { header('Location: produk.php'); exit(); }
 
 $id = $_GET['id'];
 $stmt = $pdo->prepare("SELECT * FROM produk WHERE id = ?");
 $stmt->execute([$id]);
-$product = $stmt->fetch();
-if (!$product) { header('Location: produk.php'); exit(); }
+$produk = $stmt->fetch();
+if (!$produk) { header('Location: produk.php'); exit(); }
+
 $categories = $pdo->query("SELECT * FROM kategori ORDER BY nama_kategori ASC")->fetchAll();
 ?>
 <?php require_once '../../includes/sidebar.php'; ?>
 
 <div class="mb-8">
     <h1 class="text-3xl font-bold text-gray-800">Edit Produk</h1>
-    <p class="text-gray-500 mt-1">Anda sedang mengubah detail untuk: <?= htmlspecialchars($product['nama_produk']) ?></p>
+    <p class="text-gray-500 mt-1">Anda sedang mengubah detail untuk: <?= htmlspecialchars($produk['nama_produk']) ?></p>
 </div>
 
 <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg">
     <form action="proses_edit.php" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="id" value="<?= $product['id'] ?>">
-        <input type="hidden" name="gambar_lama" value="<?= htmlspecialchars($product['gambar']) ?>">
+        <input type="hidden" name="id" value="<?= $produk['id'] ?>">
+        <input type="hidden" name="gambar_lama" value="<?= htmlspecialchars($produk['gambar']) ?>">
         
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div class="lg:col-span-2 space-y-6">
-                 <div>
-                    <label for="nama_produk" class="block text-sm font-medium text-gray-700">Nama Produk</label>
-                    <input type="text" id="nama_produk" name="nama_produk" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500" value="<?= htmlspecialchars($product['nama_produk']) ?>" required>
+                <div class="form-group">
+                    <input type="text" id="nama_produk" name="nama_produk" class="form-input placeholder-transparent" placeholder="Nama Produk" value="<?= htmlspecialchars($produk['nama_produk']) ?>" required>
+                    <label for="nama_produk" class="form-label">Nama Produk</label>
                 </div>
-                <div>
-                    <label for="kategori_id" class="block text-sm font-medium text-gray-700">Kategori</label>
-                    <select id="kategori_id" name="kategori_id" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500" required>
+                <div class="form-group">
+                    <select id="kategori_id" name="kategori_id" class="form-input form-select placeholder-transparent" required>
                         <?php foreach($categories as $category): ?>
-                            <option value="<?= $category['id'] ?>" <?= ($product['kategori_id'] == $category['id']) ? 'selected' : '' ?>><?= htmlspecialchars($category['nama_kategori']) ?></option>
+                            <option value="<?= $category['id'] ?>" <?= ($produk['kategori_id'] == $category['id']) ? 'selected' : '' ?>><?= htmlspecialchars($category['nama_kategori']) ?></option>
                         <?php endforeach; ?>
                     </select>
+                    <label for="kategori_id" class="form-label">Kategori</label>
                 </div>
-                <div>
-                    <label for="deskripsi" class="block text-sm font-medium text-gray-700">Deskripsi</label>
-                    <textarea id="deskripsi" name="deskripsi" rows="5" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500"><?= htmlspecialchars($product['deskripsi']) ?></textarea>
+                <div class="form-group">
+                    <textarea id="deskripsi" name="deskripsi" rows="5" class="form-input placeholder-transparent" placeholder="Deskripsi"><?= htmlspecialchars($produk['deskripsi']) ?></textarea>
+                    <label for="deskripsi" class="form-label">Deskripsi</label>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label for="harga" class="block text-sm font-medium text-gray-700">Harga (Rp)</label>
-                        <input type="number" id="harga" name="harga" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500" value="<?= $product['harga'] ?>" required>
+                    <div class="form-group">
+                        <input type="number" id="harga" name="harga" class="form-input placeholder-transparent" placeholder="Harga (Rp)" value="<?= $produk['harga'] ?>" required>
+                        <label for="harga" class="form-label">Harga (Rp)</label>
                     </div>
-                    <div>
-                        <label for="stok" class="block text-sm font-medium text-gray-700">Stok</label>
-                        <input type="number" id="stok" name="stok" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500" value="<?= $product['stok'] ?>" required>
+                    <div class="form-group">
+                        <input type="number" id="stok" name="stok" class="form-input placeholder-transparent" placeholder="Stok" value="<?= $produk['stok'] ?>" required>
+                        <label for="stok" class="form-label">Stok</label>
+                    </div>
+                    <div class="form-group">
+                            <input type="number" id="berat" name="berat" class="form-input placeholder-transparent" placeholder="Berat (gram)" value="<?= $produk['berat'] ?>" required>
+                            <label for="berat" class="form-label">Berat (gram)</label>
                     </div>
                 </div>
             </div>
@@ -55,7 +65,7 @@ $categories = $pdo->query("SELECT * FROM kategori ORDER BY nama_kategori ASC")->
                 <label class="block text-sm font-medium text-gray-700">Gambar Produk</label>
                 <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg">
                     <div class="space-y-1 text-center">
-                        <img id="imagePreview" src="/tokosepatu/uploads/<?= htmlspecialchars($product['gambar']) ?>" alt="Image Preview" class="mx-auto h-32 w-32 object-cover rounded-md mb-4">
+                        <img id="imagePreview" src="/tokosepatu/uploads/<?= htmlspecialchars($produk['gambar']) ?>" alt="Image Preview" class="mx-auto h-32 w-32 object-cover rounded-md mb-4">
                         <i id="iconPreview" class="fas fa-image fa-3x text-gray-400 mx-auto hidden"></i>
                         <div class="flex text-sm text-gray-600">
                             <label for="gambar" class="relative cursor-pointer bg-white rounded-md font-medium text-orange-600 hover:text-orange-500">

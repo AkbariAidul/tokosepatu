@@ -23,7 +23,7 @@ $items = $stmt_items->fetchAll();
     <div class="flex items-center gap-3">
         <a href="pesanan.php" class="text-orange-500 hover:underline font-semibold">&larr; Kembali ke Daftar Pesanan</a>
         <a href="cetak_invoice.php?id=<?= $order['id'] ?>" target="_blank" class="bg-gray-700 hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded-lg shadow-sm flex items-center">
-            <i class="fas fa-print mr-2"></i> Cetak Invois
+            <i class="fas fa-print mr-2"></i> Cetak Invoice
         </a>
     </div>
 </div>
