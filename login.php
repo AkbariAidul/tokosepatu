@@ -11,6 +11,9 @@ if (isset($_SESSION['user_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Admin Panel</title>
+
+    <link rel="icon" href="/tokosepatu/assets/images/shoes.png" type="image/png">
+    <link rel="apple-touch-icon" href="/tokosepatu/assets/images/favicon.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
